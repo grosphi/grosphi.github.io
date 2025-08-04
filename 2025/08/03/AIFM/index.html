@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="grosphi">
+
+
+
+
+
+<title>AIFM | 胡思乱想</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">火火的胡思乱想</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">火火的胡思乱想</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">AIFM</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">grosphi</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">八月 3, 2025&nbsp;&nbsp;22:52:28</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <ul>
+<li><a href="#non-polarity">Non-Polarity</a><ul>
+<li><a href="#2021-wave-inversion-real-time-determination-of-earthquake-focal-mechanism-via-deep-learning">2021 Wave inversion: Real-time determination of earthquake focal mechanism via deep learning</a><ul>
+<li><a href="#points">points</a></li>
+<li><a href="#details">Details</a><ul>
+<li><a href="#synthetic-data">synthetic data</a><ul>
+<li><a href="#training-set">training set</a></li>
+<li><a href="#testing-set">testing set</a></li>
+</ul>
+</li>
+<li><a href="#real-data">real data</a><ul>
+<li><a href="#valid-data">valid data</a></li>
+</ul>
+</li>
+<li><a href="#preprocess">preprocess</a></li>
+</ul>
+</li>
+<li><a href="#network">NETWORK</a></li>
+<li><a href="#discussion">Discussion</a></li>
+</ul>
+</li>
+<li><a href="#2021-p-amplitude-inversion-for-shear-tensile-focal-mechanisms-using-an-unsupervised-physics-guided-neural-network">2021 P amplitude: Inversion for Shear-Tensile Focal Mechanisms Using an Unsupervised Physics-Guided Neural Network</a><ul>
+<li><a href="#network-physics-guided-neural-network">NETWORK-physics-guided neural network</a><ul>
+<li><a href="#input-and-preprosessing">input and preprosessing</a></li>
+<li><a href="#three-fully-connected-layers">three fully connected layers</a></li>
+<li><a href="#output">output</a></li>
+<li><a href="#forwarding-layer">forwarding layer</a></li>
+<li><a href="#loss-mse-optimier-adam">loss: MSE, optimier: ADAM</a></li>
+</ul>
+</li>
+<li><a href="#training-dataset">training dataset</a></li>
+<li><a href="#merits">merits</a></li>
+</ul>
+</li>
+<li><a href="#2024-wave-inversion-determination-of-earthquake-focal-mechanism-via-multi-task-learning">2024 Wave inversion: Determination of earthquake focal mechanism via multi-task learning</a><ul>
+<li><a href="#data-preparation">data preparation</a></li>
+</ul>
+</li>
+<li><a href="#2021-insar--inversion-of-seismic-source-parameters-from-satellite-insar-data-based-on-deep-learning">2021 InSAR,  Inversion of seismic source parameters from satellite InSAR data based on deep learning</a></li>
+</ul>
+</li>
+<li><a href="#polarity">Polarity</a><ul>
+<li><a href="#2020-polarity-comparison-of-single-trace-and-multiple-trace-polarity-determination-for-surface-microseismic-data-using-deep-learning">2020 Polarity: Comparison of Single-Trace and Multiple Trace Polarity Determination for Surface Microseismic Data Using Deep Learning</a><ul>
+<li><a href="#single-trace-net">Single-Trace Net:</a></li>
+<li><a href="#multi-trace-net">Multi-Trace Net:</a></li>
+<li><a href="#result">Result</a></li>
+</ul>
+</li>
+<li><a href="#2022-polarity%E8%A1%A5%E9%BD%90-using-machine-learning-techniques-with-incomplete-polarity-datasets-to-improve-earthquake-focal-mechanism-determination">2022 Polarity补齐: Using Machine Learning Techniques with Incomplete Polarity Datasets to Improve Earthquake Focal Mechanism Determination</a></li>
+</ul>
+</li>
+<li><a href="#non-deep-learning">Non-Deep Learning</a><ul>
+<li><a href="#2023-das-earthquake-focal-mechanism-with-distributed-acoustic-sensing">2023 DAS: Earthquake focal mechanism with distributed acoustic sensing</a></li>
+<li><a href="#workflow">Workflow</a><ul>
+<li><a href="#relative-polarity-measurement-through-iterative-multi-channel-cross-correlation">Relative polarity measurement through iterative multi-channel cross-correlation</a></li>
+</ul>
+</li>
+<li><a href="#2016-a-newstrategy-for-earthquake-focal-mechanisms-using-waveform-correlation-derived-relative-polarities-and-cluster-analysis-application-to-the-2014-long-valley-caldera-earthquake-swarm">2016: A newstrategy for earthquake focal mechanisms using waveform-correlation-derived relative polarities and cluster analysis: Application to the 2014 Long Valley Caldera earthquake swarm</a><ul>
+<li><a href="#reconciling-relative-polarity-measurements">Reconciling Relative Polarity Measurements</a></li>
+<li><a href="#workflow-1">Workflow</a></li>
+<li><a href="#futuer">Futuer</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#application">Application</a><ul>
+<li><a href="#2023-refined-earthquake-focal-mechanism-catalog-for-southern-california-derived-with-deep-learning-algorithms">2023: Refined Earthquake Focal Mechanism Catalog for Southern California Derived With Deep Learning Algorithms</a></li>
+<li><a href="#2022-exploratory-analysis-of-earthquake-moment-tensor-catalog-using-data-visualization-of-unsupervised-machine-learning">2022: Exploratory analysis of earthquake moment tensor catalog using data visualization of unsupervised machine learning</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="Non-Polarity"><a href="#Non-Polarity" class="headerlink" title="Non-Polarity"></a>Non-Polarity</h1><h2 id="2021-Wave-inversion-Real-time-determination-of-earthquake-focal-mechanism-via-deep-learning"><a href="#2021-Wave-inversion-Real-time-determination-of-earthquake-focal-mechanism-via-deep-learning" class="headerlink" title="2021 Wave inversion: Real-time determination of earthquake focal mechanism via deep learning"></a>2021 Wave inversion: Real-time determination of earthquake focal mechanism via deep learning</h2><p><a target="_blank" rel="noopener" href="https://doi.org/10.1038/s41467-021-21670-x">https://doi.org/10.1038/s41467-021-21670-x</a></p>
+<h3 id="points"><a href="#points" class="headerlink" title="points"></a>points</h3><p>(Focal Mechanism Network, FMNet) for estimating the source focal mechanism rapidly using full waveforms.<br>Trained with synthetic data at first and then applied to real data directly.<br>We simulate theoretical waveforms with a variety of focal mechanisms at each spatial grid point.<br>We produce a by-product of the encoder, which is a sparse representation of the input waveforms, to analyze the working mechanism and robustness of the FMNet.</p>
+<p><img src="/../image/AIFM/image-2.png" alt="alt text"></p>
+<h3 id="Details"><a href="#Details" class="headerlink" title="Details"></a>Details</h3><h4 id="synthetic-data"><a href="#synthetic-data" class="headerlink" title="synthetic data"></a>synthetic data</h4><h5 id="training-set"><a href="#training-set" class="headerlink" title="training set"></a>training set</h5><p>grid: 0.1°, 0.1°, 2km(lat, lon, dep)<br>focal mechanism grid: 30, 10, 20 degree(strike, dip, rake)<br>each training sample: (48, 128) 3channel*16stations, 128s(sampling_rate: 1s)</p>
+<h5 id="testing-set"><a href="#testing-set" class="headerlink" title="testing set"></a>testing set</h5><p>1000 samples, the same as above</p>
+<h4 id="real-data"><a href="#real-data" class="headerlink" title="real data"></a>real data</h4><h5 id="valid-data"><a href="#valid-data" class="headerlink" title="valid data"></a>valid data</h5><p>4 moderate to large events in the area</p>
+<h4 id="preprocess"><a href="#preprocess" class="headerlink" title="preprocess"></a>preprocess</h4><p><code>The waveform is firstly identified with the detection and picking algorithm if used in real data</code><br>filter: 0.05-0.1Hz<br>aligning with the theoretical P wave first arrival<br>normalize by maximum<br>add noise from real recordings; randonly scales the amplitudes to simulate different SNR<br>randon time shift to simulate picking errors</p>
+<h3 id="NETWORK"><a href="#NETWORK" class="headerlink" title="NETWORK"></a>NETWORK</h3><p><img src="/../image/AIFM/image-1.png" alt="alt text"><br>compression part(to extract features in waveforms) and upsampling part( to generate guassion probability of strike, dip, rake from features).<br>the same figuration of the kernel size in each part(3<em>3 for compression and 3</em>1 for upsampling).<br>training parameter: the deviation of gaussion function in given labels is tested to be around 10 degree to be best.</p>
+<h3 id="Discussion"><a href="#Discussion" class="headerlink" title="Discussion"></a>Discussion</h3><p><code>The comparsion of waveforms is the most straight way to evaluate the predicted results.</code><br><code>The comparsion of features extracted by compression part using L2-norm.</code><br><code>This model could only predict moderate-to-large events. This may be solved by adopting a 3D velocity model to help model the high-frequency data or combine the P wave first motions and waveforms data.</code><br><code>The focal depth is not sensitive to the waveforms.</code><br><code>The current FMNet is designed for monitoring local or regional events within the coverage of a seismic network.</code></p>
+<h2 id="2021-P-amplitude-Inversion-for-Shear-Tensile-Focal-Mechanisms-Using-an-Unsupervised-Physics-Guided-Neural-Network"><a href="#2021-P-amplitude-Inversion-for-Shear-Tensile-Focal-Mechanisms-Using-an-Unsupervised-Physics-Guided-Neural-Network" class="headerlink" title="2021 P amplitude: Inversion for Shear-Tensile Focal Mechanisms Using an Unsupervised Physics-Guided Neural Network"></a>2021 P amplitude: Inversion for Shear-Tensile Focal Mechanisms Using an Unsupervised Physics-Guided Neural Network</h2><p><a target="_blank" rel="noopener" href="https://doi.org/10.1785/0220200420">https://doi.org/10.1785/0220200420</a></p>
+<p><img src="/../image/AIFM/image-3.png" alt="alt text"></p>
+<h3 id="NETWORK-physics-guided-neural-network"><a href="#NETWORK-physics-guided-neural-network" class="headerlink" title="NETWORK-physics-guided neural network"></a>NETWORK-physics-guided neural network</h3><h4 id="input-and-preprosessing"><a href="#input-and-preprosessing" class="headerlink" title="input and preprosessing"></a>input and preprosessing</h4><p>Input: picked P-wave amplitude(M, N), M, N are the numbers of events and stations, respectively.<br>S-wave can be used as well if the quality permit.<br>Preprocessing: masking, geometrical spreading, normalization<br>Masking: to avoid effects caused by individual stations with unavailable or unreliable picks and to ensure that all events considered in the inversion have the same input size<br>Normalization: by the maximam amplitude of a event</p>
+<h4 id="three-fully-connected-layers"><a href="#three-fully-connected-layers" class="headerlink" title="three fully connected layers"></a>three fully connected layers</h4><p>First and second layer are followed by ReLU layers to avoid linearity, and thrid one is followed by a sigmoid layer to get output.</p>
+<h4 id="output"><a href="#output" class="headerlink" title="output"></a>output</h4><p>Strike, dip, rake, slope(this parameter describe the tensile part of the mechanism). Instead of 6 parameters conventional used, 4 paramters can </p>
+<h4 id="forwarding-layer"><a href="#forwarding-layer" class="headerlink" title="forwarding layer"></a>forwarding layer</h4><p>In contrast to conventional data-driven machine-learning approaches, we incorporate a forward-modeling layer, called radiation pattern and normalization, into the proposed network to generate theoretical normalized P-wave amplitudes for any given shear-tensile focal mechanism. Then, the network uses the physics implied by the radiation patterns to guide the training for model parameters by minimizing the residual between observed and modeled data.</p>
+<h4 id="loss-MSE-optimier-ADAM"><a href="#loss-MSE-optimier-ADAM" class="headerlink" title="loss: MSE, optimier: ADAM"></a>loss: MSE, optimier: ADAM</h4><h3 id="training-dataset"><a href="#training-dataset" class="headerlink" title="training dataset"></a>training dataset</h3><p>530 high-quality focal mechanisms calculated by Zhang(2019).</p>
+<h3 id="merits"><a href="#merits" class="headerlink" title="merits"></a>merits</h3><p><code>Less parameters to be predicted.</code><br><code>Less parameters in the network so that training can be done as a fast speed.</code><br><code>Phisics-based nerual network.</code></p>
+<h2 id="2024-Wave-inversion-Determination-of-earthquake-focal-mechanism-via-multi-task-learning"><a href="#2024-Wave-inversion-Determination-of-earthquake-focal-mechanism-via-multi-task-learning" class="headerlink" title="2024 Wave inversion: Determination of earthquake focal mechanism via multi-task learning"></a>2024 Wave inversion: Determination of earthquake focal mechanism via multi-task learning</h2><p><a target="_blank" rel="noopener" href="https://doi.org/10.1016/j.cageo.2023.105513">https://doi.org/10.1016/j.cageo.2023.105513</a></p>
+<p><img src="/../image/AIFM/image-5.png" alt="alt text"></p>
+<p><img src="/../image/AIFM/image-6.png" alt="alt text"></p>
+<p><code>automatic parameter assignment to capture shared or task-specific information, eliminating the need to add several new parameters for each job.</code></p>
+<p>CNN + Bi-LSTM: effectively extract features and information from sequential data and improve the accuracy and generalization of the model.</p>
+<p>ResNet-50: capture high-level features, thus enhance the accuracy of the model. </p>
+<p>MobileNet V1: leverages the power of depthwise separable convolutions, reducing the size and computional requirements of the model.</p>
+<p>Huber loss: combines the MAE and MSE</p>
+<h3 id="data-preparation"><a href="#data-preparation" class="headerlink" title="data preparation"></a>data preparation</h3><p>8:1:1 for training, validation and testing respectively.</p>
+<p>3rd Butter from 0.1Hz to 10Hz after detrending.</p>
+<p>data were labeled in [0, 360], [0, 90] and [-180, 180] respectively.</p>
+<p>I am wondering whether the location for each event and station was integrated as the input of the network. As the FMNet(Kuang et al., 2021) used the fixed station in one region, I would like to know how MTFMN deals with the data from different regions.  </p>
+<h2 id="2021-InSAR-Inversion-of-seismic-source-parameters-from-satellite-InSAR-data-based-on-deep-learning"><a href="#2021-InSAR-Inversion-of-seismic-source-parameters-from-satellite-InSAR-data-based-on-deep-learning" class="headerlink" title="2021 InSAR,  Inversion of seismic source parameters from satellite InSAR data based on deep learning"></a>2021 InSAR,  Inversion of seismic source parameters from satellite InSAR data based on deep learning</h2><p>At present, the two-step inversion is widely used to obtain accurate seismic source parameters using InSAR data based on the Okada elastic half-space model (Atzori et al., 2019; Fathian et al., 2021). The first step is using non-linear optimization algorithms to obtain approximate seismic source parameters (i.e., fault geometry) based on uniform slip model and the second step is to get the slip distribution to acquire accurate seismic source parameters (Fathian et al., 2021; Gombert et al., 2019).<br>However, the nonlinear inversion step relies on a priori information (Roger et al., 2020), and easily gets trapped into local minima (Chen et al., 2019), which is complex and time-consuming (Picchiani et al., 2011).</p>
+<p>THIS NETWORK IS COMPOSED OF DESNET, trained by generated data.</p>
+<p><img src="/../image/AIFM/image-14.png" alt="alt text"><br>In Table 1, the step size used to obtain parameters within the range is in brackets, and the number of simulated data for different fault types is shown in the last column. Two factors are mainly considered in the setting of step size. Firstly, appropriate step size is necessary because too small step size results in almost identical interferogram and the size of dataset will increase dramatically, which leads to model training difficulty while too large step size results in data set not large enough, which leads to poor generalization ability of the model. Secondly, step size is set to maintain a balanced number of samples of fault type to be classified so as to avoid class imbalance problem. </p>
+<p>Here are six DesNet in the network, with two classifying the fault type while the rest four are regressors to estimate the fault parameter.<br><img src="/../image/AIFM/image-13.png" alt="alt text"></p>
+<h1 id="Polarity"><a href="#Polarity" class="headerlink" title="Polarity"></a>Polarity</h1><h2 id="2020-Polarity-Comparison-of-Single-Trace-and-Multiple-Trace-Polarity-Determination-for-Surface-Microseismic-Data-Using-Deep-Learning"><a href="#2020-Polarity-Comparison-of-Single-Trace-and-Multiple-Trace-Polarity-Determination-for-Surface-Microseismic-Data-Using-Deep-Learning" class="headerlink" title="2020 Polarity: Comparison of Single-Trace and Multiple Trace Polarity Determination for Surface Microseismic Data Using Deep Learning"></a>2020 Polarity: Comparison of Single-Trace and Multiple Trace Polarity Determination for Surface Microseismic Data Using Deep Learning</h2><p> The basic idea of our method is to train a CNN model with several neighboring seismograms as a training sample so that the network canutilize the polarity information of neighbor receivers of the station array at the same time.</p>
+<h3 id="Single-Trace-Net"><a href="#Single-Trace-Net" class="headerlink" title="Single-Trace Net:"></a>Single-Trace Net:</h3><p>classification, entropy loss, ReLU activation in hidden layers and Softmax in output layer</p>
+<h3 id="Multi-Trace-Net"><a href="#Multi-Trace-Net" class="headerlink" title="Multi-Trace Net:"></a>Multi-Trace Net:</h3><p>regressor, MSE loss, tanh activation in output layer</p>
+<p><img src="/../image/AIFM/image-4.png" alt="alt text"></p>
+<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p>The statistics illustrate that the ST-CNN and MT-CNN yield comparable prediction accuracies for the test set with 92.34% and 92.89%, respectively.–&gt;indicting error1可能是说data里没有判断出来的polarity，但是现在被multi-Trace判断出来了</p>
+<p>error 2 of the MT CNN is approximately 0.3%, whereas that of the ST-CNN is 1.63%–&gt;error2 反应了multi-Trace的误判变低</p>
+<p>MT-CNN offers better performance in the case in which both negative and positive polarities exist in the neighboring traces.</p>
+<h2 id="2022-Polarity补齐-Using-Machine-Learning-Techniques-with-Incomplete-Polarity-Datasets-to-Improve-Earthquake-Focal-Mechanism-Determination"><a href="#2022-Polarity补齐-Using-Machine-Learning-Techniques-with-Incomplete-Polarity-Datasets-to-Improve-Earthquake-Focal-Mechanism-Determination" class="headerlink" title="2022 Polarity补齐: Using Machine Learning Techniques with Incomplete Polarity Datasets to Improve Earthquake Focal Mechanism Determination"></a>2022 Polarity补齐: Using Machine Learning Techniques with Incomplete Polarity Datasets to Improve Earthquake Focal Mechanism Determination</h2><p><a target="_blank" rel="noopener" href="https://doi.org/10.1785/0220220103">https://doi.org/10.1785/0220220103</a></p>
+<p>Advance in Shelly et al.(2016) by replacing missing an low-confidence polarity measurements with estimated values using a machining learning approach (random forest)</p>
+<p>I don’t fully understand the workflow but to know the procedure from ② to ③, using random forest to predict missing value in the matrix.</p>
+<h1 id="Non-Deep-Learning"><a href="#Non-Deep-Learning" class="headerlink" title="Non-Deep Learning"></a>Non-Deep Learning</h1><h2 id="2023-DAS-Earthquake-focal-mechanism-with-distributed-acoustic-sensing"><a href="#2023-DAS-Earthquake-focal-mechanism-with-distributed-acoustic-sensing" class="headerlink" title="2023 DAS: Earthquake focal mechanism with distributed acoustic sensing"></a>2023 DAS: Earthquake focal mechanism with distributed acoustic sensing</h2><p>用DAS数据直接判断P波极性是困难的（challenging）因为低SNR（以及DAS recordings对于locally scattered surface waves更敏感相对于vertical particle motion），但是cross-correlations between earthquake pairs结合other polarity information或许有用。</p>
+<p>correlation peaks as the patterns of local scatterers are similar for different eqrthquakes.A positive correlation coefficient indicates that those two earthquakes share the same polarity, while a negative correlation value implies an opposite polarity on a given channel. </p>
+<p><img src="/../image/AIFM/image-10.png" alt="alt text"></p>
+<p>We find that the inverted polarities match well with the predicted vertical displacement polarities instead of the predicted longitudinal-strain polarities</p>
+<p>The article applys a joint focal mechanism inversion combining conventional and DAS polarity picks improves the accuracy and reduces the uncertainty in the focal plane orientation.</p>
+<p><img src="/../image/AIFM/image-11.png" alt="alt text"></p>
+<p>这些结果的潜在物理机制是，地震对P波窗口之间互相关的主要贡献来自表面散射，因为水平光纤电缆对近垂直第一运动的敏感性较弱。</p>
+<p>此外，表面散射的符号直接对应于入射P波引起的初始运动的方向。因此，尽管由于DAS的低信噪比和水平灵敏度，很难从原始波形中直接确定第一运动极性，但我们可以稳健地推断地震对之间的相对第一运动极。更具体地说，两个P波窗口之间的正互相关值表示入射P波的相同初始运动方向，而负值表示相反的初始运动方向。</p>
+<p>Theoretically,if the fiber cable samples across onen odalline once and the other nodalline twice on the beachball, the focal mechanism can be uniquely determined, since the focal mechanism has only three independent parameters.</p>
+<p><img src="/../image/AIFM/image-12.png" alt="alt text"></p>
+<h2 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h2><ol>
+<li>preprocessing<br> PhaseNet-DAS picking, 1-10Hz bandpass filter and a median filter</li>
+<li>polarity picking and inversion<ol>
+<li>During the second step, we perform pairwise cross-correlations among all similar P-phase windows at each channel and its adjacent channel</li>
+<li>We use the MCCC to pick the maximum absolute cross-correlation values, where the sign of the picked value indicates the relative polarity. </li>
+<li>The picked relative polarities are then inverted to obtain the “channel-consistent” polarities for all earthquakes and all channels. The final absolute polarity can be obtained by measuring one or more robustly, multiple P-wave polarities on thevertical componentsofnearbybroadbandstations.</li>
+</ol>
+</li>
+<li>joint focal mechanism inversion</li>
+</ol>
+<p><img src="/../image/AIFM/image-19.png" alt="alt text"></p>
+<p><img src="/../image/AIFM/image-20.png" alt="alt text"></p>
+<h3 id="Relative-polarity-measurement-through-iterative-multi-channel-cross-correlation"><a href="#Relative-polarity-measurement-through-iterative-multi-channel-cross-correlation" class="headerlink" title="Relative polarity measurement through iterative multi-channel cross-correlation"></a>Relative polarity measurement through iterative multi-channel cross-correlation</h3><h2 id="2016-A-newstrategy-for-earthquake-focal-mechanisms-using-waveform-correlation-derived-relative-polarities-and-cluster-analysis-Application-to-the-2014-Long-Valley-Caldera-earthquake-swarm"><a href="#2016-A-newstrategy-for-earthquake-focal-mechanisms-using-waveform-correlation-derived-relative-polarities-and-cluster-analysis-Application-to-the-2014-Long-Valley-Caldera-earthquake-swarm" class="headerlink" title="2016: A newstrategy for earthquake focal mechanisms using waveform-correlation-derived relative polarities and cluster analysis: Application to the 2014 Long Valley Caldera earthquake swarm"></a>2016: A newstrategy for earthquake focal mechanisms using waveform-correlation-derived relative polarities and cluster analysis: Application to the 2014 Long Valley Caldera earthquake swarm</h2><p><code>用互相关确定的极性信息来反演震源机制解，互相关确定的极性是相对（对于模板来说）的，需要目录的先验知识可以确定唯一的极性值</code></p>
+<p><code>中小地震的波形结构更多来源于传播路径而不是震源时间函数</code><br>互相关确定P波相对极性的假设：</p>
+<ol>
+<li>grouping events with highly correlated waveforms work well for events in very close proximity but break down at large separations.</li>
+<li>similarity in moment tensor</li>
+</ol>
+<p>如下图：</p>
+<ol>
+<li>互相关的绝对值最大处的值为＋ -&gt; 俩波形极性一致；为－ -&gt; 极性相反（理想情况为+1 or -1）</li>
+<li>secondary peak be separated from the main peak by at least<code>0.03s</code>, such that the secondary peak is distinct<br> <img src="/../image/AIFM/image-16.png" alt="alt text"></li>
+</ol>
+<h3 id="Reconciling-Relative-Polarity-Measurements"><a href="#Reconciling-Relative-Polarity-Measurements" class="headerlink" title="Reconciling Relative Polarity Measurements"></a>Reconciling Relative Polarity Measurements</h3><p><img src="/../image/AIFM/image-17.png" alt="alt text"></p>
+<h3 id="Workflow-1"><a href="#Workflow-1" class="headerlink" title="Workflow"></a>Workflow</h3><ol>
+<li>每一个phase<code>k</code>的上面这个矩阵，作SVD，取左边矩阵<code>nxn</code>的最左列，得到一个矩阵<code>nxk</code></li>
+<li>聚类<code>clustering</code><br> 每一类的机制解类似<br> 两个向量的similarity：$cos \theta$</li>
+<li>直接用分好的<code>cluster</code>在catalog里算机制解</li>
+<li>用<code>CC-Derived polarities</code>结合catalog结果算机制解<br> 台站k的加权因子：$wt_{catpol_k}$衡量原有目录和<code>CC-Derived</code>极性的一致性<br> The most direct analogy to the composite mechanisms derived from catalog phase picks is to use all of non-zero CC polarity for vertical P(the elements of appropriate column of $P_{SVD}$)</li>
+<li>Mechansims from “Consensus” CC-Derived polarity<br> 更加强调先前确定的聚类作为内聚的事件组，因为每个cluster的平均位置计算AZ，TAKEOFF<br>  Ideally, the consensus values would retain information about our relative confidence in the measurement that can be used as weights in the final inversion<br> <img src="/../image/AIFM/image-18.png" alt="alt text"></li>
+</ol>
+<h3 id="Future"><a href="#Future" class="headerlink" title="Future"></a>Future</h3><ol>
+<li>joint inversion of location and mechanism</li>
+<li>separate correlation for mechanism</li>
+</ol>
+<h1 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h1><h2 id="2023-Refined-Earthquake-Focal-Mechanism-Catalog-for-Southern-California-Derived-With-Deep-Learning-Algorithms"><a href="#2023-Refined-Earthquake-Focal-Mechanism-Catalog-for-Southern-California-Derived-With-Deep-Learning-Algorithms" class="headerlink" title="2023: Refined Earthquake Focal Mechanism Catalog for Southern California Derived With Deep Learning Algorithms"></a>2023: Refined Earthquake Focal Mechanism Catalog for Southern California Derived With Deep Learning Algorithms</h2><p>This article takes use of the CNN phase picker and CNN polarity classifier(Ross, 2018) to get a better catalog in Southern California.</p>
+<p><img src="/../image/AIFM/image-7.png" alt="alt text"><br><img src="/../image/AIFM/image-8.png" alt="alt text"></p>
+<p>Focal mechanism determined with HASH using P polarity as P&#x2F;S amplitude ratio.<br><img src="/../image/AIFM/image-9.png" alt="alt text"></p>
+<h2 id="2022-Exploratory-analysis-of-earthquake-moment-tensor-catalog-using-data-visualization-of-unsupervised-machine-learning"><a href="#2022-Exploratory-analysis-of-earthquake-moment-tensor-catalog-using-data-visualization-of-unsupervised-machine-learning" class="headerlink" title="2022: Exploratory analysis of earthquake moment tensor catalog using data visualization of unsupervised machine learning"></a>2022: Exploratory analysis of earthquake moment tensor catalog using data visualization of unsupervised machine learning</h2><p>We performed exploratory data analysis of the moment tensor catalog to objectively obtain images of seismic activity and to acquire knowledge on the spatial and temporal characteristics of the earthquake mechanism.<br>This study demonstrates that data visualization is useful for intuitively and objectively understanding the regional characteristics of earthquake mechanisms. </p>
+<p>The dimensionality reduction method is divided into linear and non-linear approaches. Considering that earthquake spatial distribution is heterogeneous and non-continuous, it is desirable to adopt the nonlinear approach. <code>UMAP</code> transform 5 parameters(lon, lat, dep, x, y) into two parameter. x, y is the location in focal mechanism classifier map. The distance in the embedding map re ects similarity between earthquakes</p>
+<p>For data preprocessing of UMAP, we performed axis transformation using PCA for the latitude and longitude because the spatial distribution of earthquakes around Japan extends in the northeast-southwest direction and there is a strong correlation between latitude and longitude information.</p>
+<p><img src="/../image/AIFM/image-15.png" alt="alt text"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>grosphi</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2025/08/03/AIFM/">http://example.com/2025/08/03/AIFM/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/AI-focal-mechanism-polarity/"># AI, focal mechanism, polarity</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+            
+            <a class="next" rel="next" href="/2025/08/03/hello-world/">Hello World</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© grosphi | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
