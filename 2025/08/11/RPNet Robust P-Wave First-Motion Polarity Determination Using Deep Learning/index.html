@@ -13,7 +13,7 @@
 
 
 
-<title>NC：地震中频率-震级分布的强度依赖性及其对应力状态临界性的影响 | 胡思乱想</title>
+<title>RPNet--Robust P-Wave First-Motion Polarity Determination Using Deep Learning | 胡思乱想</title>
 
 
 
@@ -203,7 +203,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">NC：地震中频率-震级分布的强度依赖性及其对应力状态临界性的影响</h1>
+            <h1 class="post-title">RPNet--Robust P-Wave First-Motion Polarity Determination Using Deep Learning</h1>
             
                 <div class="post-meta">
                     
@@ -212,7 +212,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">八月 7, 2025&nbsp;&nbsp;22:52:28</a>
+                        Date: <a href="#">八月 11, 2025&nbsp;&nbsp;22:52:28</a>
                         </span>
                     
                     
@@ -221,21 +221,43 @@
         </header>
 
         <div class="post-content">
-            <h1 id="Strength-dependency-of-frequency–magnitude-distribution-in-earthquakes-and-implications-for-stress-state-criticality"><a href="#Strength-dependency-of-frequency–magnitude-distribution-in-earthquakes-and-implications-for-stress-state-criticality" class="headerlink" title="Strength dependency of frequency–magnitude distribution in earthquakes and implications for stress state criticality"></a>Strength dependency of frequency–magnitude distribution in earthquakes and implications for stress state criticality</h1><p><img src="/../image/%E5%9C%B0%E9%9C%87%E4%B8%AD%E9%A2%91%E7%8E%87-%E9%9C%87%E7%BA%A7%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%BA%E5%BA%A6%E4%BE%9D%E8%B5%96%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AF%B9%E5%BA%94%E5%8A%9B%E7%8A%B6%E6%80%81%E4%B8%B4%E7%95%8C%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D/image-20250807151354885.png" alt="image-20250807151354885"></p>
-<p>一些研究发现大地震前后b值变化显著，实验室的岩石实验发现b-value随着差应力增加而减小。也即，当差应力接近断层强度时（岩石破坏的临界条件），b-value会减小。特别是，这些结果强调了在估算b值时考虑介质强度的重要性，因为在岩石破裂实验中，差应力可能不会经常持续增加直到破坏，而是在破坏前可能趋于平稳。这意味着小地震活动会由于内部摩擦的降低和孔隙压力的增加等因素导致岩石强度减弱而出现波动。</p>
-<h3 id="Mohr圆和库伦破坏准则（CFF）"><a href="#Mohr圆和库伦破坏准则（CFF）" class="headerlink" title="Mohr圆和库伦破坏准则（CFF）"></a>Mohr圆和库伦破坏准则（CFF）</h3><p>为了确定介质应力在mohr圆上的位置，需要知道正应力和剪应力，也就要确定介质上的应力张量和断层形状。</p>
-<p>不考虑应力大小时，可以通过震源机制估计区域应力场。基于Wallace-Bott假设，断层沿着最大剪应力放向滑动。从而可以估计应力张量主方向和特征值之间的应力比，可以画出mohr圆并确定应力状态处于圆上的位置</p>
-<h2 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h2><h3 id="High-precision-focal-mechanism-observations"><a href="#High-precision-focal-mechanism-observations" class="headerlink" title="High-precision focal mechanism observations"></a>High-precision focal mechanism observations</h3><p>估计应力场使用了<code>2000</code> 和<code>2017OBS</code>的数据，估计b-value仅仅使用<code>2017OBS</code>数据，由于<code>2000</code>的数据震级范围过小（b-value的计算需要震级跨度大的目录）</p>
-<p>尽管以前的研究表明b值依赖于深度（即依赖于差应力Δσ），但本研究中b值的深度依赖行为不明确，如图2b所示。我们使用ZMAP 7软件31对三个深度（Z）范围（Z≤7.5 km，Z&gt;7.5 km以及所有深度）计算了b值。使用ZMAP 7软件进行b值估计时，固定最小震级（Mc &#x3D; -0.3，如后续部分所采用）并未在三个深度范围内产生明显差异。这一结果表明，其深度依赖性可能很小（&lt;0.1），尽管差应力预计会随深度增加而增加。</p>
-<p><img src="/../image/%E5%9C%B0%E9%9C%87%E4%B8%AD%E9%A2%91%E7%8E%87-%E9%9C%87%E7%BA%A7%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%BA%E5%BA%A6%E4%BE%9D%E8%B5%96%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AF%B9%E5%BA%94%E5%8A%9B%E7%8A%B6%E6%80%81%E4%B8%B4%E7%95%8C%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D/image-20250807162038369.png" alt="image-20250807162038369"></p>
-<h3 id="b-value-map-on-a-normalized-Mohr-circle"><a href="#b-value-map-on-a-normalized-Mohr-circle" class="headerlink" title="b-value map on a normalized Mohr circle"></a>b-value map on a normalized Mohr circle</h3><p>给定区域划分成小块，每一个小块都可以算一个b-value和应力张量（前提是地震记录足够多，因为这是日本，所以适合作为研究区域）</p>
-<p>从观测数据集中选定的断层面上，归一化的剪切应力和法向应力被绘制在单位莫尔圆上，如图3a所示。我们通过将莫尔圆分段来估计b值分布（图3b）。最低的b值被确定为位于圆的最外侧部分，相对于水平线顺时针方向θ介于90°到50°之间。图3c展示了莫尔圆各分段上的b值及其标准误差。所有数据以及更宽的分段（r&lt;0.8，θ&#x3D;0–90°和θ&#x3D;90–180°）的b值也作为参考进行了绘制。频度-震级图如图4所示。在r≥0.8且θ介于90°到50°之间的范围内，b值显著小于其他范围。断层面滑动矢量位于最大主应力和最小主应力（σ1-σ3平面）的平面上时，属于高r值段；而位于σ1-σ3平面的斜向滑动的断层面则出现在低r值段。在低r值段观察到的高b值表明，当断层面的滑动矢量相对于σ1-σ3平面呈斜向时，破裂可能难以扩展；从而导致地震震级受到抑制，进而产生较高的b值。</p>
-<p><img src="/../image/%E5%9C%B0%E9%9C%87%E4%B8%AD%E9%A2%91%E7%8E%87-%E9%9C%87%E7%BA%A7%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%BA%E5%BA%A6%E4%BE%9D%E8%B5%96%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AF%B9%E5%BA%94%E5%8A%9B%E7%8A%B6%E6%80%81%E4%B8%B4%E7%95%8C%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D/image-20250807162205711.png" alt="image-20250807162205711"></p>
-<p>换句话说，在大震中，对于应力场最优的断层面比不利取向的断层面更容易破裂。这导致了观测到的最优断层面的低b-value地震活动。这是合理的，因为在相同应力条件下，最优范围内的断层面比范围外的断层面具有更大的可释放弹性能量。位于最优范围之外的断层面可能产生的地震比范围内的小，因为较大的地震需要较大的断层带被削弱，这通常被认为更困难。</p>
-<p><img src="/../image/%E5%9C%B0%E9%9C%87%E4%B8%AD%E9%A2%91%E7%8E%87-%E9%9C%87%E7%BA%A7%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%BA%E5%BA%A6%E4%BE%9D%E8%B5%96%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AF%B9%E5%BA%94%E5%8A%9B%E7%8A%B6%E6%80%81%E4%B8%B4%E7%95%8C%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D/image-20250807164442920.png" alt="image-20250807164442920"></p>
-<h2 id="Methods"><a href="#Methods" class="headerlink" title="Methods"></a>Methods</h2><p>震源机制用HASH计算，ZMAP获得完备震级（分别是1.7，-0.5）</p>
-<p>应力场用每个小区域内所有的地震矩张量之和计算</p>
-<p>b-value用最大似然法（MLE）估计（也是ZMAP）</p>
+            <p>tags: deep learning, P-wave polarity</p>
+<h3 id="Network"><a href="#Network" class="headerlink" title="Network"></a>Network</h3><p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811164615448-1754901979937-1-1754901983657-3.png" alt="image-20250811164615448"></p>
+<p>亮点：</p>
+<ol>
+<li>Inception module，通过多尺度卷积核并行处理地震波形数据，从而捕捉不同频率范围内的细节信息，另外，allow greater depth while minimizing the number of parameters</li>
+<li>self-attention，注意力机制则允许模型动态地关注那些对于极性判断更为关键的时间段或频段，进一步提升预测的准确性</li>
+<li>Monte Carlo dropout，量化预测结果的不确定性</li>
+<li>RPNet，如何判断unknown（K），通过std是否超过threshold（ex：0.2）；mRPNet（minor version）：直接分三类（U，D，K）</li>
+</ol>
+<h3 id="Previous-Problems-from-Benchmarks"><a href="#Previous-Problems-from-Benchmarks" class="headerlink" title="Previous Problems(from Benchmarks)"></a>Previous Problems(from Benchmarks)</h3><p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811165856477.png" alt="image-20250811165856477"></p>
+<ol>
+<li>需要time-shift很小，也就是说P波拾取要很准（但是在现有的拾取精度0.05s&#x2F;0.2s内表现就下滑很多），即使有些Network是用了shift0.5s的数据训练（比如CFM，但我记得ROSS也是）</li>
+<li>U&#x2F;D偏好问题：判断为U的概率会明显大于D，这一点在加入K后更加明显</li>
+<li>加入K后的三分类问题的效果远低于只有U、D的二分类问题，对于K的正确分类相对还高一些，但是会出现很多把U、D分成K的现象，time-shift增大后更加明显（这种结果可能来自：overfitting caused by the low-quality labels in the training data, as many of K labeled data are actually U or D but the preference of analyst classify a U or D as a K.）</li>
+<li>但是不加入K的训练数据又迫使分类中确实没有P波的数据（或者说真正分不清的&#x2F;没有物理意义的数据）被分为U&#x2F;D</li>
+</ol>
+<p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811170525245.png" alt="image-20250811170525245"></p>
+<h3 id="Training-Data"><a href="#Training-Data" class="headerlink" title="Training Data"></a>Training Data</h3><p><strong>常规处理</strong></p>
+<ol>
+<li>使用不同地区的数据集的合集作为训练集</li>
+<li>数据集的扩张：add time-shift（0-0.5s）；flip；由于原本的数据集中U的数量大于D，所以移除了多出来的U使U的数量等于D（<code>但是flip已经可以使U=D了，我不理解为什么要这样</code>）</li>
+<li>仅使用之前研究中和<strong>一致意见（分类相同的数据）</strong></li>
+<li>其他常规处理：1Hz高通滤波；截取4s的窗；8：1：1的训练、验证、测试比例</li>
+</ol>
+<p>训练过程：这里看来比较常规，一般的神经网络训练过程</p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811172208094.png" alt="image-20250811172208094"></p>
+<ol>
+<li>对于time-shift的抗性明显增强</li>
+<li>不再出现U&#x2F;D的偏好差距过大</li>
+<li>加入K的三分类问题仍旧没有解决，这通过std的设置来处理分类中结果不是很好的数据</li>
+</ol>
+<p>这里只关注U&#x2F;D的二分类问题，因为加入K的结果不尽人意（和CFM类似？）</p>
+<p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811172343019.png" alt="image-20250811172343019"></p>
+<h3 id="此外，来自-震源物理进展-公众号的评论"><a href="#此外，来自-震源物理进展-公众号的评论" class="headerlink" title="此外，来自 震源物理进展 公众号的评论"></a>此外，来自 震源物理进展 公众号的评论</h3><p><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s/D0WEJOLM18l6iwFfP1y1HQ?scene=1">https://mp.weixin.qq.com/s/D0WEJOLM18l6iwFfP1y1HQ?scene=1</a></p>
+<p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811172928375.png" alt="image-20250811172928375"></p>
+<p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811172935472.png" alt="image-20250811172935472"></p>
+<p><img src="/../image/RPNet_Robust_P-Wave_First-Motion_Polarity_Determination_Using_Deep_Learning/image-20250811172948035.png" alt="image-20250811172948035"></p>
 
         </div>
 
@@ -250,7 +272,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2025/08/07/%E5%9C%B0%E9%9C%87%E4%B8%AD%E9%A2%91%E7%8E%87-%E9%9C%87%E7%BA%A7%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%BA%E5%BA%A6%E4%BE%9D%E8%B5%96%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AF%B9%E5%BA%94%E5%8A%9B%E7%8A%B6%E6%80%81%E4%B8%B4%E7%95%8C%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D/">http://example.com/2025/08/07/%E5%9C%B0%E9%9C%87%E4%B8%AD%E9%A2%91%E7%8E%87-%E9%9C%87%E7%BA%A7%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%BA%E5%BA%A6%E4%BE%9D%E8%B5%96%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AF%B9%E5%BA%94%E5%8A%9B%E7%8A%B6%E6%80%81%E4%B8%B4%E7%95%8C%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D/</a></span>
+                        <span><a href="http://example.com/2025/08/11/RPNet%20Robust%20P-Wave%20First-Motion%20Polarity%20Determination%20Using%20Deep%20Learning/">http://example.com/2025/08/11/RPNet%20Robust%20P-Wave%20First-Motion%20Polarity%20Determination%20Using%20Deep%20Learning/</a></span>
                     </p>
                 
                 
@@ -274,7 +296,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/b-value-failure-condition-reduction-of-b-value-before-big-EQ/"># b-value, failure condition, reduction of b-value before big EQ</a>
+                        <a href="/tags/deep-learning-P-wave-polarity/"># deep learning, P-wave polarity</a>
                     
                         
                 </span>
@@ -287,10 +309,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2025/08/11/RPNet%20Robust%20P-Wave%20First-Motion%20Polarity%20Determination%20Using%20Deep%20Learning/">RPNet--Robust P-Wave First-Motion Polarity Determination Using Deep Learning</a>
             
-            
-            <a class="next" rel="next" href="/2025/08/03/AIFM/">AIFM</a>
+            <a class="next" rel="next" href="/2025/08/07/%E5%9C%B0%E9%9C%87%E4%B8%AD%E9%A2%91%E7%8E%87-%E9%9C%87%E7%BA%A7%E5%88%86%E5%B8%83%E7%9A%84%E5%BC%BA%E5%BA%A6%E4%BE%9D%E8%B5%96%E6%80%A7%E5%8F%8A%E5%85%B6%E5%AF%B9%E5%BA%94%E5%8A%9B%E7%8A%B6%E6%80%81%E4%B8%B4%E7%95%8C%E6%80%A7%E7%9A%84%E5%BD%B1%E5%93%8D/">NC：地震中频率-震级分布的强度依赖性及其对应力状态临界性的影响</a>
             
         </section>
 
