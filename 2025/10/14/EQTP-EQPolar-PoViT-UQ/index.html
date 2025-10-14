@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+<meta name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <meta name="author" content="grosphi">
+
+
+
+
+
+<title>EQTP-EQPolar-PoViT-UQ | 胡思乱想</title>
+
+
+
+    <link rel="icon" href="/favicon.ico">
+
+
+
+
+    <!-- stylesheets list from _config.yml -->
+    
+    <link rel="stylesheet" href="/css/style.css">
+    
+
+
+
+    <!-- scripts list from _config.yml -->
+    
+    <script src="/js/script.js"></script>
+    
+    <script src="/js/tocbot.min.js"></script>
+    
+
+
+
+    
+    
+        
+    
+
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+<body>
+    <script>
+        // this function is used to check current theme before page loaded.
+        (() => {
+            const pagebody = document.getElementsByTagName('body')[0]
+
+            function setTheme(status) {
+
+                if (status === 'dark') {
+                    window.sessionStorage.theme = 'dark'
+                    pagebody.classList.add('dark-theme');
+
+                } else if (status === 'light') {
+                    window.sessionStorage.theme = 'light'
+                    pagebody.classList.remove('dark-theme');
+                }
+            };
+
+            setTheme(window.sessionStorage.theme)
+        })();
+    </script>
+
+    <div class="wrapper">
+        <header>
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-header header-logo"><a href="/">火火的胡思乱想</a></div>
+            <div class="menu navbar-right">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+                
+                <input id="switch_default" type="checkbox" class="switch_default">
+                <label for="switch_default" class="toggleBtn"></label>
+            </div>
+        </div>
+    </nav>
+
+    
+    <nav class="navbar-mobile" id="nav-mobile">
+        <div class="container">
+            <div class="navbar-header">
+                <div>
+                    <a href="/">火火的胡思乱想</a><a id="mobile-toggle-theme">·&nbsp;Light</a>
+                </div>
+                <div class="menu-toggle" onclick="mobileBtn()">
+                    <svg class="menu-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><path fill="currentColor" d="M4.5 17.27q-.213 0-.356-.145T4 16.768t.144-.356t.356-.143h15q.213 0 .356.144q.144.144.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.144T4 11.999t.144-.356t.356-.143h15q.213 0 .356.144t.144.357t-.144.356t-.356.143zm0-4.77q-.213 0-.356-.143Q4 7.443 4 7.23t.144-.356t.356-.143h15q.213 0 .356.144T20 7.23t-.144.356t-.356.144z"/></svg>
+                    <svg class="close-icon" xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="m12 12.708l-5.246 5.246q-.14.14-.344.15t-.364-.15t-.16-.354t.16-.354L11.292 12L6.046 6.754q-.14-.14-.15-.344t.15-.364t.354-.16t.354.16L12 11.292l5.246-5.246q.14-.14.345-.15q.203-.01.363.15t.16.354t-.16.354L12.708 12l5.246 5.246q.14.14.15.345q.01.203-.15.363t-.354.16t-.354-.16z"/></svg>
+                </div>
+            </div>
+            <div class="menu" id="mobile-menu">
+                
+                <a class="menu-item" href="/archives">Posts</a>
+                
+                <a class="menu-item" href="/category">Categories</a>
+                
+                <a class="menu-item" href="/tag">Tags</a>
+                
+                <a class="menu-item" href="/about">About</a>
+                
+            </div>
+        </div>
+    </nav>
+
+</header>
+<script>
+    var mobileBtn = function f() {
+        var toggleMenu = document.getElementsByClassName("menu-toggle")[0];
+        var mobileMenu = document.getElementById("mobile-menu");
+        if (toggleMenu.classList.contains("active")) {
+            toggleMenu.classList.remove("active")
+            mobileMenu.classList.remove("active")
+        } else {
+            toggleMenu.classList.add("active")
+            mobileMenu.classList.add("active")
+        }
+    }
+</script>
+            <div class="main">
+                <div class="container">
+    
+    
+        <div class="post-toc">
+    <div class="tocbot-list">
+    </div>
+    <div class="tocbot-list-menu">
+        <a class="tocbot-toc-expand" onclick="expand_toc()">Expand all</a>
+        <a onclick="go_top()">Back to top</a>
+        <a onclick="go_bottom()">Go to bottom</a>
+    </div>
+</div>
+
+<script>
+    var tocbot_timer;
+    var DEPTH_MAX = 6; // 为 6 时展开所有
+    var tocbot_default_config = {
+        tocSelector: '.tocbot-list',
+        contentSelector: '.post-content',
+        headingSelector: 'h1, h2, h3, h4, h5',
+        orderedList: false,
+        scrollSmooth: true,
+        onClick: extend_click,
+    };
+
+    function extend_click() {
+        clearTimeout(tocbot_timer);
+        tocbot_timer = setTimeout(function() {
+            tocbot.refresh(obj_merge(tocbot_default_config, {
+                hasInnerContainers: true
+            }));
+        }, 420); // 这个值是由 tocbot 源码里定义的 scrollSmoothDuration 得来的
+    }
+
+    document.ready(function() {
+        tocbot.init(obj_merge(tocbot_default_config, {
+            collapseDepth: 1
+        }));
+    });
+
+    function expand_toc() {
+        var b = document.querySelector('.tocbot-toc-expand');
+        var expanded = b.getAttribute('data-expanded');
+        expanded ? b.removeAttribute('data-expanded') : b.setAttribute('data-expanded', true);
+        tocbot.refresh(obj_merge(tocbot_default_config, {
+            collapseDepth: expanded ? 1 : DEPTH_MAX
+        }));
+        b.innerText = expanded ? 'Expand all' : 'Collapse all';
+    }
+
+    function go_top() {
+        window.scrollTo(0, 0);
+    }
+
+    function go_bottom() {
+        window.scrollTo(0, document.body.scrollHeight);
+    }
+
+    function obj_merge(target, source) {
+        for (var item in source) {
+            if (source.hasOwnProperty(item)) {
+                target[item] = source[item];
+            }
+        }
+        return target;
+    }
+</script>
+    
+
+    
+    <article class="post-wrap">
+        <header class="post-header">
+            <h1 class="post-title">EQTP-EQPolar-PoViT-UQ</h1>
+            
+                <div class="post-meta">
+                    
+                        Author: <a itemprop="author" rel="author" href="/">grosphi</a>
+                    
+
+                    
+                        <span class="post-time">
+                        Date: <a href="#">十月 14, 2025&nbsp;&nbsp;21:44:14</a>
+                        </span>
+                    
+                    
+                </div>
+            
+        </header>
+
+        <div class="post-content">
+            <p>一些极性判定神经网络</p>
+<ol>
+<li><p>EQTP</p>
+</li>
+<li><p>EQPolar</p>
+</li>
+<li><p>PoViT-UQ</p>
+</li>
+</ol>
+<h1 id="EQTP"><a href="#EQTP" class="headerlink" title="EQTP"></a>EQTP</h1><p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014152214191.png" alt="image-20251014152214191"></p>
+<h3 id="Data"><a href="#Data" class="headerlink" title="Data"></a>Data</h3><p>北加州和加州中央2019-2023年数据，没道trace有100Hz的12000个采样点（120s），</p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014151238288.png" alt="image-20251014151238288"></p>
+<h3 id="Model"><a href="#Model" class="headerlink" title="Model"></a>Model</h3><p>Transformer serves as the core structure, utilizing a global attention mechanism to focus on global waveform features and a local atention mechanism in the phase task decoder to focus on seismic phases.</p>
+<p>通过从 EQT 中去除 BiLSTM 层，降低了计算复杂度，减轻了梯度消失或爆炸问题，并使训练过程更加稳定和高效。去除 BiLSTM 层后，模型的训练时间从 50 小时减少到 40 小时。</p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014151355517.png" alt="image-20251014151355517"></p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><p>For polarity determination, an additional threshold of picking  error was set at 10 sampling points (i.e., 0.1 s) to filter out the potential polarity uncertainty  and bias. </p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014152053833.png" alt="image-20251014152053833"></p>
+<h1 id="EQPolar"><a href="#EQPolar" class="headerlink" title="EQPolar"></a>EQPolar</h1><p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014152150360.png" alt="image-20251014152150360"></p>
+<h3 id="Model-1"><a href="#Model-1" class="headerlink" title="Model"></a>Model</h3><p>input: 6s, 3s before P arrival and 3s after P arrival.</p>
+<p>compact convolutional transformer(CCT): highlight the curcial information of the input data.</p>
+<p>There is only one fully connected layer and one neuron in this specific architecture, which means the output of this layer will be a single-element probability of the class, e.g., above 0.5, we consider as Down and below 0.5, we consider as Up.</p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014152829826.png" alt="image-20251014152829826"></p>
+<h3 id="Results-1"><a href="#Results-1" class="headerlink" title="Results"></a>Results</h3><p>和一些知名的CNN的比较–层数越多，效果越好</p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014153333066.png" alt="image-20251014153333066"></p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014153348606.png" alt="image-20251014153348606"></p>
+<p><code>表现</code>：</p>
+<p>Specifically, for the 21 Ml ≥ 3.0 events, 15 are labeled quality A (71.43%), 4 are labeled as quality B (19.05%), and only 2 are labeled as quality C (9.52%), resulting in 90.48% high-quality solutions. For the 87 Ml ≥ 2.5 events, 50 are labeled quality A (57.47%), 23 are labeled as quality B (26.44%), 4 are labeled as quality C (4.60%), and 10 are labeled as quality D (11.49%), resulting in 83.91% high quality solutions. For the 319 Ml ≥ 2.0 events, 152 are labeled quality A (47.65%), 81 are labeled as quality B (25.39%), 9 are labeled as quality C (2.82%), and 77 are labeled as quality D (24.14%), resulting in 73.04% high-quality solutions. It is clear that the proposed workflow is more reliable for larger magnitude events.</p>
+<h1 id="PoViT-UQ"><a href="#PoViT-UQ" class="headerlink" title="PoViT-UQ"></a>PoViT-UQ</h1><p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014153950817.png" alt="image-20251014153950817"></p>
+<h3 id="组件"><a href="#组件" class="headerlink" title="组件"></a>组件</h3><h6 id="ViT-Vision-Transformer"><a href="#ViT-Vision-Transformer" class="headerlink" title="ViT(Vision Transformer)"></a>ViT(Vision Transformer)</h6><p>reported to achieve higher accuarcy than CNNs in image recognition tasks</p>
+<h6 id="MCD-Monte-Carlo-Dropout"><a href="#MCD-Monte-Carlo-Dropout" class="headerlink" title="MCD(Monte Carlo Dropout)"></a>MCD(Monte Carlo Dropout)</h6><h3 id="Data-Japan"><a href="#Data-Japan" class="headerlink" title="Data(Japan)"></a>Data(Japan)</h3><p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014160520735.png" alt="image-20251014160520735"></p>
+<h3 id="Model-2"><a href="#Model-2" class="headerlink" title="Model"></a>Model</h3><p>The model takes vertical component (UD) waveforms as input.  The data length was set to 256 samples (2.56 s) for the 100 Hz model  and 512 samples (2.048 s) for the 250 Hz model. The input wave-  form is divided into overlapping patches of length 16, shifted by one  sample. </p>
+<p>The model outputs are the probability for each polarity class (Up,  Down, Noise) and a probability distribution for the P -wave arrival  time. After feature extraction, the class token is passed through a  fully connected layer and Softmax to produce polarity probabilities.  The segmentation tokens are passed through a convolutional layer  (kernel size &#x3D; 9), followed by Softmax to produce a probability  distribution over time for the P -wave arrival (P) and non-arrival (N)  classes.</p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014160706428.png" alt="image-20251014160706428"></p>
+<p><code>不确定性分析</code>：通过MC Dropout</p>
+<h3 id="Results-2"><a href="#Results-2" class="headerlink" title="Results"></a>Results</h3><p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014160758890.png" alt="image-20251014160758890"></p>
+<p><strong>250 Hz模型表现</strong>：</p>
+<ul>
+<li>Up类：F1分数0.975（阈值0.45），准确率97.3%</li>
+<li>Down类：F1分数0.975（阈值0.56），准确率98.1%</li>
+<li>Noise类：F1分数0.993（阈值0.24），准确率98.8%</li>
+<li>到时拾取：均值误差0.000秒，标准差0.027秒</li>
+</ul>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014160813861.png" alt="image-20251014160813861"></p>
+<p><strong>注意力可视化分析</strong></p>
+<p>模型注意力图清晰展示了决策依据：</p>
+<ul>
+<li>信号存在时，注意力集中在P波初动位置</li>
+<li>纯噪声输入时，稳态噪声段注意力均匀分布，非稳态变化处注意力集中</li>
+<li>即使在低振幅信号和复杂噪声环境下，模型仍能准确定位初动</li>
+</ul>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014161215520.png" alt="image-20251014161215520"></p>
+<p><strong>性能评估</strong></p>
+<p>主要和SNR相关，0.5以上对于100Hz和250Hz的模型都不错</p>
+<p>a. 信噪比影响：SNR &gt; 0.5时保持高准确率</p>
+<p>b. IQR阈值效应：89%（100 Hz）和94%（250 Hz）的数据IQR ≤ 0.05</p>
+<p>c. 概率-IQR负相关：高概率预测通常伴随低不确定性</p>
+<p>IQR: interquartile range(四分位距)</p>
+<p><img src="/../image/EQTP-EQPolar-PoViT-UQ/image-20251014161251663.png" alt="image-20251014161251663"></p>
+
+        </div>
+
+        
+            <section class="post-copyright">
+                
+                    <p class="copyright-item">
+                        <span>Author:</span>
+                        <span>grosphi</span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>Permalink:</span>
+                        <span><a href="http://example.com/2025/10/14/EQTP-EQPolar-PoViT-UQ/">http://example.com/2025/10/14/EQTP-EQPolar-PoViT-UQ/</a></span>
+                    </p>
+                
+                
+                    <p class="copyright-item">
+                        <span>License:</span>
+                        <span>Copyright (c) 2019 <a target="_blank" rel="noopener" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC-4.0</a> LICENSE</span>
+                    </p>
+                
+                
+                     <p class="copyright-item">
+                         <span>Slogan:</span>
+                         <span>Do you believe in <strong>DESTINY</strong>?</span>
+                     </p>
+                
+
+            </section>
+        
+        <section class="post-tags">
+            <div>
+                <span>Tag(s):</span>
+                <span class="tag">
+                    
+                    
+                        <a href="/tags/deep-learning-polarity-determination-phase-picking/"># deep-learning, polarity-determination, phase-picking</a>
+                    
+                        
+                </span>
+            </div>
+            <div>
+                <a href="javascript:window.history.back();">back</a>
+                <span>· </span>
+                <a href="/">home</a>
+            </div>
+        </section>
+        <section class="post-nav">
+            
+                <a class="prev" rel="prev" href="/2025/10/14/2017_cc_determined-polar/">2017_cc_determined-polar</a>
+            
+            
+            <a class="next" rel="next" href="/2025/08/15/APP-DiTingMotion-CFM/">APP-DiTingMotion-CFM</a>
+            
+        </section>
+
+
+    </article>
+</div>
+
+            </div>
+            <footer id="footer" class="footer">
+    <div class="copyright">
+        <span>© grosphi | Powered by <a href="https://hexo.io" target="_blank">Hexo</a> & <a href="https://github.com/Siricee/hexo-theme-Chic" target="_blank">Chic</a></span>
+    </div>
+</footer>
+
+    </div>
+</body>
+
+</html>
