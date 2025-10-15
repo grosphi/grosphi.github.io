@@ -13,7 +13,7 @@
 
 
 
-<title>2017_cc_determined-polar | 胡思乱想</title>
+<title>Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders | 胡思乱想</title>
 
 
 
@@ -203,7 +203,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">2017_cc_determined-polar</h1>
+            <h1 class="post-title">Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders</h1>
             
                 <div class="post-meta">
                     
@@ -212,7 +212,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十月 14, 2025&nbsp;&nbsp;21:52:19</a>
+                        Date: <a href="#">十月 15, 2025&nbsp;&nbsp;18:30:00</a>
                         </span>
                     
                     
@@ -221,22 +221,25 @@
         </header>
 
         <div class="post-content">
-            <h1 id="2017-cc-determined-polar"><a href="#2017-cc-determined-polar" class="headerlink" title="2017_cc_determined-polar"></a>2017_cc_determined-polar</h1><p><img src="/../image/2017_cc_determined-polar/image-20251014164004319.png" alt="image-20251014164004319"></p>
-<p><img src="/../image/2017_cc_determined-polar/image-20251014165048841.png" alt="image-20251014165048841"></p>
-<h3 id="Assumptions"><a href="#Assumptions" class="headerlink" title="Assumptions"></a>Assumptions</h3><ol>
-<li><p>point source</p>
-</li>
-<li><p>ignore propagation effect, the waveforms recorded at each station should share a common source time function shape, whose amplitudes are controlled by the radiation pattern from the source</p>
-</li>
-<li><p>假设：green函数一致（因为震源够浅，但台站也很近啊？）</p>
-</li>
+            <p>![image-20251015162346463](..&#x2F;image&#x2F;Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders&#x2F;e5e0e2de0e3dd34030e839cab7bf510b.png)</p>
+<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>![image-20251015164834702](..&#x2F;image&#x2F;Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders&#x2F;4ceac5d5d0683debe2985e5c7c77211a.png)</p>
+<p>无监督学习（clustering）</p>
+<p>network: an undercomplete fully convolutional autoencoder</p>
+<p>clustering layer: K-means</p>
+<p>Loss function:<br>$$<br>L&#x3D;(1-\lambda)L_r + \lambda L_c<br>$$</p>
+<ol>
+<li>先把λ设为0（不考虑聚类），预训练（也算是一种自监督方法）</li>
+<li>the learned features are used to initialize the cluster centroids ($u_j$) in the feature space using k-means.</li>
+<li>fine-tuning stage，调整λ，训练分类模型</li>
 </ol>
-<h3 id="Method"><a href="#Method" class="headerlink" title="Method"></a>Method</h3><p>CC测量对极性分类（用SNR最好的波形作为基准计算CC值），同一类stack确定极性，为了只考虑第一个峰（代表极性），使用一些函数压制第一个峰以后的波形（using a cosine taper ）</p>
-<p><img src="/../image/2017_cc_determined-polar/image-20251014170131413.png" alt="image-20251014170131413"></p>
-<p>procedure</p>
-<p><img src="/../image/2017_cc_determined-polar/image-20251014170325450.png" alt="image-20251014170325450"></p>
-<h3 id="Result"><a href="#Result" class="headerlink" title="Result"></a>Result</h3><p><img src="/../image/2017_cc_determined-polar/image-20251014170501238.png" alt="image-20251014170501238"></p>
-<h3 id="Mechanism"><a href="#Mechanism" class="headerlink" title="Mechanism"></a>Mechanism</h3><p><img src="/../image/2017_cc_determined-polar/image-20251014170414745.png" alt="image-20251014170414745"></p>
+<h3 id="Results"><a href="#Results" class="headerlink" title="Results"></a>Results</h3><h4 id="DISCRIMINATING-LOCAL-FROM-TELESEISMIC-SEISMOGRAMS"><a href="#DISCRIMINATING-LOCAL-FROM-TELESEISMIC-SEISMOGRAMS" class="headerlink" title="DISCRIMINATING LOCAL FROM TELESEISMIC SEISMOGRAMS"></a>DISCRIMINATING LOCAL FROM TELESEISMIC SEISMOGRAMS</h4><p>训练为输入时频谱： In our previous study [21], we obtained a better result for discriminating earthquake depth between different seismic signals working in the time–frequency domain.</p>
+<p>下图为聚类空间中的划分，从a到f，区分越来明显，clustering acc分别为50%，85%，87%，—，—，98.41%</p>
+<p>另外，数据量仅9.2k vertical component，相比于 Meier et al. [9] trained a random forest classifier using a set of hand-selected features extracted from ~237k samples and were able to classify 95% of teleseismic records correctly.</p>
+<p>![image-20251015181904977](..&#x2F;image&#x2F;Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders&#x2F;image-20251015181904977.png)</p>
+<h4 id="APPLICATION-FOR-FIRST-MOTION-POLARITY-DETERMINATION"><a href="#APPLICATION-FOR-FIRST-MOTION-POLARITY-DETERMINATION" class="headerlink" title="APPLICATION FOR FIRST-MOTION POLARITY DETERMINATION"></a>APPLICATION FOR FIRST-MOTION POLARITY DETERMINATION</h4><p>输入：We only used records with picked P-arrival time and assigned upward and downward first-motion polarity as determined by analysts. We then used 32 samples (0.32 s) around the P-arrival as the input to our deep clustering neural network (Fig. 2).</p>
+<p>结果：不如其他监督方法。We obtained an overall accuracy of 0.97. The precision, recall, and F-score for upward polarities are 0.99, 0.82, and 0.9, respectively, although the corresponding values for the downward polarities are 0.72, 0.99, and 0.83.</p>
+<p>由于所提出的网络架构的功能是自动特征提取和降维，我们发现较小的维度会导致更高的重构误差，从而降低聚类精度。网络维度的选择取决于问题的复杂性。遗憾的是，对于选择瓶颈维度并没有经验法则。一种经验方法是从一个过完备的自编码器开始，在预训练步骤中逐渐降低瓶颈维度，直到重构损失开始显著增加。</p>
+<p>![image-20251015182517026](..&#x2F;image&#x2F;Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders&#x2F;image-20251015182517026.png)</p>
 
         </div>
 
@@ -251,7 +254,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2025/10/14/2017_cc_determined-polar/">http://example.com/2025/10/14/2017_cc_determined-polar/</a></span>
+                        <span><a href="http://example.com/2025/10/15/Unsupervised%20Clustering%20of%20Seismic%20Signals%20Using%20Deep%20Convolutional%20Autoencoders/">http://example.com/2025/10/15/Unsupervised%20Clustering%20of%20Seismic%20Signals%20Using%20Deep%20Convolutional%20Autoencoders/</a></span>
                     </p>
                 
                 
@@ -275,7 +278,7 @@
                 <span class="tag">
                     
                     
-                        <a href="/tags/cross-correlation-polarity-determination-%E9%92%BB%E4%BA%95%E8%AF%B1%E5%8F%91%E5%9C%B0%E9%9C%87/"># cross-correlation, polarity-determination, 钻井诱发地震</a>
+                        <a href="/tags/%E6%97%A0%E7%9B%91%E7%9D%A3%E5%AD%A6%E4%B9%A0%EF%BC%8C%E8%BF%9C%E8%BF%91%E9%9C%87%E7%9B%B8%E6%95%B0%E6%8D%AE%E5%88%86%E7%B1%BB%EF%BC%8CP%E6%B3%A2%E6%9E%81%E6%80%A7%E5%88%86%E7%B1%BB/"># 无监督学习，远近震相数据分类，P波极性分类</a>
                     
                         
                 </span>
@@ -288,10 +291,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2025/10/15/Unsupervised%20Clustering%20of%20Seismic%20Signals%20Using%20Deep%20Convolutional%20Autoencoders/">Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders</a>
             
-            
-            <a class="next" rel="next" href="/2025/10/14/EQTP-EQPolar-PoViT-UQ/">EQTP-EQPolar-PoViT-UQ</a>
+            <a class="next" rel="next" href="/2025/10/14/2017_cc_determined-polar/">2017_cc_determined-polar</a>
             
         </section>
 
