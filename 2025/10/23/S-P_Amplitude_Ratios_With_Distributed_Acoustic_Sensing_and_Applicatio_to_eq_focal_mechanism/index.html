@@ -13,7 +13,7 @@
 
 
 
-<title>小巧思-科研版 | 胡思乱想</title>
+<title>S/P Amplitude Ratios with DAS and Application to EQ Focal Mechanism | 胡思乱想</title>
 
 
 
@@ -203,7 +203,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">小巧思-科研版</h1>
+            <h1 class="post-title">S/P Amplitude Ratios with DAS and Application to EQ Focal Mechanism</h1>
             
                 <div class="post-meta">
                     
@@ -212,7 +212,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十月 17, 2025&nbsp;&nbsp;19:38:25</a>
+                        Date: <a href="#">十月 23, 2025&nbsp;&nbsp;15:05:18</a>
                         </span>
                     
                     
@@ -221,13 +221,35 @@
         </header>
 
         <div class="post-content">
-            <h3 id="25-10-17"><a href="#25-10-17" class="headerlink" title="25-10-17:"></a>25-10-17:</h3><p>关于P波极性：</p>
-<ol>
-<li><p>可能的方法是利用无监督网络（比如CNN、transformer、attention block啥的，最后聚类比如K-means）。可以找出尽可能相似的green函数的类（比如按照震中距、震源深度、SNR或者用无监督网络啥的分类），每个类里面再做P的极性分类（这样的网络也许可以用短一点的窗，前面的green分类网络也许可以用频谱训练？）。</p>
-</li>
-<li><p>先去个噪？怎么不把出动的一起去掉呢？</p>
-</li>
-</ol>
+            <p><img src="/../image/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/image-20251023144441721.png" alt="image-20251023144441721"></p>
+<p><img src="/../image/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/image-20251023145243783.png" alt="image-20251023145243783"></p>
+<h3 id="DAS测量地震波振幅的可能问题"><a href="#DAS测量地震波振幅的可能问题" class="headerlink" title="DAS测量地震波振幅的可能问题"></a>DAS测量地震波振幅的可能问题</h3><p>问题是DAS测量的（伸展或压缩应变）响应，S&#x2F;P和正常台站记录是否一样，计算出比值是否有意义？</p>
+<p>​	这个貌似前人（也是25年的）已经证实：DAS测量应变-&gt;粒子速度</p>
+<h3 id="DAS测量S-P-ratios的测试"><a href="#DAS测量S-P-ratios的测试" class="headerlink" title="DAS测量S&#x2F;P ratios的测试"></a>DAS测量S&#x2F;P ratios的测试</h3><ul>
+<li>不同滤波频带（1-20 Hz范围）</li>
+<li>不同时间窗口（-0.5到1.5秒）</li>
+<li>应变与应变率记录</li>
+<li>所有参数组合的均方误差（MSE）均小于0.15，远优于散射引起的约2倍台站变异性</li>
+<li>As the MSE for our pairs of measurements are ∼0.1 regardless of the parameters considered (Table 1), we conclude the S&#x2F;P measurements made using DAS are just as meaningful as those made using the nodal array.</li>
+</ul>
+<p><img src="/../image/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/image-20251023144611388.png" alt="image-20251023144611388"></p>
+<p>MSE: where Y are the nodal ratios, Y’ are the DAS ratios, nis the number of pairs.</p>
+<p><code>nodal and DAS pairs的比较：还挺一致的</code></p>
+<p><img src="/../image/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/image-20251023145321102.png" alt="image-20251023145321102"></p>
+<p><strong>nodal and DAS ratios结果的分布（和理论对比）</strong></p>
+<p>主要问题在于缺了S&#x2F;P很大的地方，一开始以为是SNR&gt;3的要求导致没有算P振幅很小的数据，后面又说Trugman（2025）的研究里用了更小的SNR但也是类似的结果。</p>
+<p>但总之，由于nodal和DAS表现一致，这个缺失不是由于DAS方法的缺陷</p>
+<p><img src="/../image/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/image-20251023145615723.png" alt="image-20251023145615723"></p>
+<p><strong>DAS可行的物理机制解释：为什么方向敏感性的DAS（对横向传播的体波不敏感）结果和nodal array类似</strong></p>
+<p>在实际应用中这一限制得到缓解：</p>
+<p>a. 散射表面波的作用：近地表非均匀性产生的普遍散射将直达波转换为散射表面波</p>
+<p>b. 短传播路径效应：均匀散射条件下，散射波最小化了DAS的横向不敏感性</p>
+<p>c. 实证验证：观测到的S&#x2F;P比分布与理论分布基本一致（图3）</p>
+<p>但是当DAS距离震源很近时，a的作用减小（文中的反演实例使用的事件震中距DAS21km）</p>
+<h3 id="机制解反演应用"><a href="#机制解反演应用" class="headerlink" title="机制解反演应用"></a>机制解反演应用</h3><p><img src="/../image/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/image-20251023150402368.png" alt="image-20251023150402368"></p>
+<h3 id="和Li（2023）相对P波极性的DAS方法相比："><a href="#和Li（2023）相对P波极性的DAS方法相比：" class="headerlink" title="和Li（2023）相对P波极性的DAS方法相比："></a>和Li（2023）相对P波极性的DAS方法相比：</h3><p>a. 计算更简单：无需相似地震簇或互相关处理</p>
+<p>b. 适用性更广：不依赖波形相似性</p>
+<p>c. 参数稳健性强：对合理参数选择不敏感</p>
 
         </div>
 
@@ -242,7 +264,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2025/10/17/%E5%B0%8F%E5%B7%A7%E6%80%9D/">http://example.com/2025/10/17/%E5%B0%8F%E5%B7%A7%E6%80%9D/</a></span>
+                        <span><a href="http://example.com/2025/10/23/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/">http://example.com/2025/10/23/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/</a></span>
                     </p>
                 
                 
@@ -265,6 +287,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/DAS-S-P-ratio/"># DAS, S/P ratio</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -275,10 +301,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2025/10/23/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/">基于深度学习的山东平原Ms5.5地震余震检测及发震构造研究</a>
+                <a class="prev" rel="prev" href="/2025/10/24/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/">PS波散射叠加定位和机制解反演</a>
             
             
-            <a class="next" rel="next" href="/2025/10/15/Unsupervised%20Clustering%20of%20Seismic%20Signals%20Using%20Deep%20Convolutional%20Autoencoders/">Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders</a>
+            <a class="next" rel="next" href="/2025/10/23/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/">基于深度学习的山东平原Ms5.5地震余震检测及发震构造研究</a>
             
         </section>
 

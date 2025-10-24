@@ -13,7 +13,7 @@
 
 
 
-<title>小巧思-科研版 | 胡思乱想</title>
+<title>PS波散射叠加定位和机制解反演 | 胡思乱想</title>
 
 
 
@@ -203,7 +203,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">小巧思-科研版</h1>
+            <h1 class="post-title">PS波散射叠加定位和机制解反演</h1>
             
                 <div class="post-meta">
                     
@@ -212,7 +212,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十月 17, 2025&nbsp;&nbsp;19:38:25</a>
+                        Date: <a href="#">十月 24, 2025&nbsp;&nbsp;14:57:00</a>
                         </span>
                     
                     
@@ -221,13 +221,61 @@
         </header>
 
         <div class="post-content">
-            <h3 id="25-10-17"><a href="#25-10-17" class="headerlink" title="25-10-17:"></a>25-10-17:</h3><p>关于P波极性：</p>
+            <p><img src="/../image/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/image-20251024145827167.png" alt="image-20251024145827167"></p>
+<h3 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h3><p>grid search</p>
 <ol>
-<li><p>可能的方法是利用无监督网络（比如CNN、transformer、attention block啥的，最后聚类比如K-means）。可以找出尽可能相似的green函数的类（比如按照震中距、震源深度、SNR或者用无监督网络啥的分类），每个类里面再做P的极性分类（这样的网络也许可以用短一点的窗，前面的green分类网络也许可以用频谱训练？）。</p>
+<li><p>对于一个假设源（需要对做循环），计算到直达P&#x2F;S波的travel time table</p>
 </li>
-<li><p>先去个噪？怎么不把出动的一起去掉呢？</p>
+<li><p>从波形数据中，读取对应PS到时处的振幅</p>
+</li>
+<li><p>用2.中得到的振幅算moment tensor</p>
+</li>
+<li><p>用3.的moment tensor对2.的振幅做一个矫正（都变成正的？）</p>
+</li>
+<li><p>stack4.中矫正后振幅to obtain 4D stacking function</p>
+</li>
+<li><p>Identify source location and origin time from stacking functions</p>
 </li>
 </ol>
+<p>best origin time:<br>$$</p>
+<p>$$</p>
+<p>$$<br>\tau_0&#x3D;argmax_{\tau}\sum_{i &#x3D; 1}^{N}(\hat{u}_i^P(t_i^P+\tau)+\hat{u}_i^S(t_i^S+\tau))<br>$$</p>
+<p>best location:<br>$$<br>(x_0, y_0, z_0) &#x3D; \text{argmax}<em>{x,y,x} \sum\limits</em>{i&#x3D;1}^{N} \left( \hat{u}_i^P (T_i^P(x,y,z) + \tau_0) + \hat{u}_i^S (T_i^S(x,y,z) + \tau_0) \right)<br>$$<br><code>加速方法：double-grid searching strategy（5倍）,GPU并行（快一到二个量级）</code></p>
+<h3 id="workflow"><a href="#workflow" class="headerlink" title="workflow"></a>workflow</h3><p><img src="/../image/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/image-20251024154250385.png" alt="image-20251024154250385"></p>
+<h3 id="测试和应用"><a href="#测试和应用" class="headerlink" title="测试和应用"></a>测试和应用</h3><p><strong>测试1：层状模型</strong></p>
+<ul>
+<li>使用简单三层速度模型，400个随机分布的地表检波器</li>
+<li>在强噪声条件下（信噪比极低），对比了三种方法：P-DS（仅P波）、P-JMDS（P波+极性校正）、PS-JMDS（P波+S波联合）</li>
+<li>结果显示PS-JMDS方法的定位精度最高<strong>，Kagan角误差&lt;0.1°</strong></li>
+</ul>
+<p><strong>测试2：复杂3D模型</strong></p>
+<ul>
+<li>采用3D逆冲推覆构造模型，测试了三个不同深度的震源</li>
+<li>使用平滑后的速度模型进行定位，验证了方法对速度模型误差的容忍度</li>
+<li>成功检测并定位了所有三个事件，<strong>震源机制反演误差&lt;3°</strong></li>
+</ul>
+<p><strong>应用</strong></p>
+<p>将PS-JMDS方法应用于中国四川盆地南部页岩气水力压裂监测：</p>
+<ul>
+<li>监测区域：7000m × 6000m，部署251个三分量节点地震计</li>
+<li>数据量：5天连续记录，约406GB（500Hz采样）</li>
+<li>成功检测定位908个微震事件，深度范围1.0-1.7km</li>
+<li>震源机制以走滑和正断层为主，走向集中在210°-240°</li>
+</ul>
+<p><img src="/../image/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/image-20251024154530608.png" alt="image-20251024154530608"></p>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><ol>
+<li>主要优势：抗噪性，极低SNR也可获得定位结果。PS-JMDS方法优于传统P-DS方法</li>
+<li>P&#x2F;S联合定位比只用P在z方向分辨率更高</li>
+<li>.震源机制稳定性：表4显示，即使在噪声环境下，PS-JMDS反演的震源机制误差仍小于2°，证明了方法的稳健性。<img src="/../image/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/image-20251024155016797.png" alt="image-20251024155016797"><img src="/../image/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/image-20251024154948360.png" alt="image-20251024154948360"></li>
+</ol>
+<p><strong>速度模型依赖性</strong></p>
+<p>研究通过使用高速和低速两种均匀模型测试了方法对速度模型的敏感性（图7）：</p>
+<ul>
+<li>水平定位相对稳定，误差较小</li>
+<li>深度定位受速度模型影响较大，高速模型使深度偏深，低速模型使深度偏浅</li>
+<li>使用运动学正确的速度模型即可获得满意结果，无需精确的3D速度结构</li>
+</ul>
+<p><img src="/../image/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/image-20251024154958700.png" alt="image-20251024154958700"></p>
 
         </div>
 
@@ -242,7 +290,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2025/10/17/%E5%B0%8F%E5%B7%A7%E6%80%9D/">http://example.com/2025/10/17/%E5%B0%8F%E5%B7%A7%E6%80%9D/</a></span>
+                        <span><a href="http://example.com/2025/10/24/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/">http://example.com/2025/10/24/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/</a></span>
                     </p>
                 
                 
@@ -265,6 +313,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/diffraction-stackin-joint-location-and-moment-tensor-inversion/"># diffraction stackin, joint location and moment-tensor inversion</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -275,10 +327,8 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2025/10/23/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/">基于深度学习的山东平原Ms5.5地震余震检测及发震构造研究</a>
             
-            
-            <a class="next" rel="next" href="/2025/10/15/Unsupervised%20Clustering%20of%20Seismic%20Signals%20Using%20Deep%20Convolutional%20Autoencoders/">Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders</a>
+            <a class="next" rel="next" href="/2025/10/23/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/">S/P Amplitude Ratios with DAS and Application to EQ Focal Mechanism</a>
             
         </section>
 

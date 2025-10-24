@@ -13,7 +13,7 @@
 
 
 
-<title>小巧思-科研版 | 胡思乱想</title>
+<title>基于深度学习的山东平原Ms5.5地震余震检测及发震构造研究 | 胡思乱想</title>
 
 
 
@@ -203,7 +203,7 @@
     
     <article class="post-wrap">
         <header class="post-header">
-            <h1 class="post-title">小巧思-科研版</h1>
+            <h1 class="post-title">基于深度学习的山东平原Ms5.5地震余震检测及发震构造研究</h1>
             
                 <div class="post-meta">
                     
@@ -212,7 +212,7 @@
 
                     
                         <span class="post-time">
-                        Date: <a href="#">十月 17, 2025&nbsp;&nbsp;19:38:25</a>
+                        Date: <a href="#">十月 23, 2025&nbsp;&nbsp;12:58:00</a>
                         </span>
                     
                     
@@ -221,13 +221,31 @@
         </header>
 
         <div class="post-content">
-            <h3 id="25-10-17"><a href="#25-10-17" class="headerlink" title="25-10-17:"></a>25-10-17:</h3><p>关于P波极性：</p>
-<ol>
-<li><p>可能的方法是利用无监督网络（比如CNN、transformer、attention block啥的，最后聚类比如K-means）。可以找出尽可能相似的green函数的类（比如按照震中距、震源深度、SNR或者用无监督网络啥的分类），每个类里面再做P的极性分类（这样的网络也许可以用短一点的窗，前面的green分类网络也许可以用频谱训练？）。</p>
-</li>
-<li><p>先去个噪？怎么不把出动的一起去掉呢？</p>
-</li>
+            <p><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023123838811.png" alt="image-20251023123838811"></p>
+<h3 id="大致思路"><a href="#大致思路" class="headerlink" title="大致思路"></a>大致思路</h3><ol start="0">
+<li>使用PhaseNet拾取，HypoDD双差定位</li>
+<li>CAP方法反演Ms5.5级主震机制解，HASH（用了P初动和S&#x2F;P振幅比）反演序列中较大余震机制解</li>
+<li>进一步收集震中及附近地区历史 地震的震源机制解数据，采用线性应力张量反演法计算区域构造应力场</li>
+<li>综合上述结果，分析讨论平原 MS5.5地震的发震构造和孕震机制</li>
 </ol>
+<h4 id="台站分布：（震中距不超过120km时，PhaseNet具有较强泛化能力）"><a href="#台站分布：（震中距不超过120km时，PhaseNet具有较强泛化能力）" class="headerlink" title="台站分布：（震中距不超过120km时，PhaseNet具有较强泛化能力）"></a>台站分布：（震中距不超过120km时，PhaseNet具有较强泛化能力）</h4><p><img src="/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023122705255.png" alt="image-20251023122705255"></p>
+<h4 id="速度模型"><a href="#速度模型" class="headerlink" title="速度模型"></a>速度模型</h4><p>在震相关联、地震定位和震源机制反演中使用了 同一速度模型(表1)，来源于Shen等(2016)利用地震背景噪声和地震走时的Rayleigh面波层析成像方法反演的中国及邻区地壳及上地幔S波速度模型，其中，P 波速度由经验公式(Brocher，2005)计算得到：<br>$$<br>v_p&#x3D;0.9409+2.0947v_s-0.8206v_s^2+0.2683v_s^3-0.0251v_s^4<br>$$<br><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023123455442.png" alt="image-20251023123455442"></p>
+<h3 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h3><p><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023123551956.png" alt="image-20251023123551956"></p>
+<p><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023123600763.png" alt="image-20251023123600763"></p>
+<p><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023123609384.png" alt="image-20251023123609384"></p>
+<p><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023123704211.png" alt="image-20251023123704211"></p>
+<h3 id="讨论"><a href="#讨论" class="headerlink" title="讨论"></a>讨论</h3><p>（上面区域应力场为此次目录中M&gt;2.4级地震15个（HASH质量A）和历史上87个地震（平原MS5.5地震周边区域(115°— 118°E，35°—38°N)，基于线性反演算法计算的区域构造应力场）</p>
+<p><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023124141556.png" alt="image-20251023124141556"></p>
+<p>1、地震分布及迁移特征</p>
+<p>​	精定位后，事件主要发生在主震NE侧，表明NE向单侧破裂。沿着BB’线的剖面揭示此次地震断裂产状，倾向为NW，倾角70°，和主震机制解节面Ⅰ一致。</p>
+<p>​	为了进一步分析余震迁移和发震断裂的破裂 特征，分别绘制了主震后10 min、33 min、1 h、3 h、 1 d和26 d(全部)的地震分布(图10). 从地震序列的 平面分布看，主震发生后，余震沿NE向快速迁移， 至震后33 min，初步形成NE走向带状分布(图10a1)； 随后，在早期余震区东南侧出现新的余震丛集，次 级发震断裂开始活动，但震后1 h之后该余震区活 动强度明显减弱. 沿AA′测线的剖面显示，早期余震 主要由主震位置向NE方向和浅部迁移，即发震断 裂由主震震源位置向NE和地表方向破裂. 沿BB′测 线的剖面同样显示出，早期余震向浅部迁移的特 征；此外，震后3 h至1 d，主发震断裂在20~27 km 深度范围还发生少量震级较小的余震</p>
+<p><img src="/../image/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/image-20251023125634082.png" alt="image-20251023125634082"></p>
+<p>2、发震构造分析</p>
+<p>​	综合精定位后地震序列空间分布特 征和4个较大地震的震源机制解，判定此次平原 MS5.5地震的主发震构造为一条走向NE-SW，倾向 NW的高倾角右旋走滑断裂.</p>
+<p>​	陵县—冠县断裂为此次平原MS5.5 地震的主发震断裂.</p>
+<p>3、孕震动力学机制</p>
+<p>​	平原MS5.5地震震中及附近地区的构造应力场 反演结果显示，区域应力场主要表现为NEE向水平 挤压和NWW向拉张，与GPS速度场反映的渤海湾 盆地地表变形运动(李延兴等，2007；殷海涛等，2008； 徐杰等，2017)具有较好的一致性. 综合平原MS5.5地震震源机制解和精定位结果 等资料分析，此次平原MS5.5地震是在NEE方向主 压应力作用下发震断裂沿NE向发生的右旋走滑破 裂事件(图11). 根据张培震(2003)的研究，华北平原 地块自上新世开始整体下沉，并在其内部NNE向正 断层的基础上形成右旋走滑正断裂；徐杰和计凤桔 (2015)结合区域最新构造变动和地震断裂的力学特 征等资料，分析认为整个渤海湾盆地现今处于挤压 剪切构造变形的应力环境，在该应力环境下多发育 高倾角走滑断裂.</p>
+<p>​	</p>
 
         </div>
 
@@ -242,7 +260,7 @@
                 
                     <p class="copyright-item">
                         <span>Permalink:</span>
-                        <span><a href="http://example.com/2025/10/17/%E5%B0%8F%E5%B7%A7%E6%80%9D/">http://example.com/2025/10/17/%E5%B0%8F%E5%B7%A7%E6%80%9D/</a></span>
+                        <span><a href="http://example.com/2025/10/23/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/">http://example.com/2025/10/23/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/</a></span>
                     </p>
                 
                 
@@ -265,6 +283,10 @@
                 <span>Tag(s):</span>
                 <span class="tag">
                     
+                    
+                        <a href="/tags/EQ-catalog/"># EQ catalog</a>
+                    
+                        
                 </span>
             </div>
             <div>
@@ -275,10 +297,10 @@
         </section>
         <section class="post-nav">
             
-                <a class="prev" rel="prev" href="/2025/10/23/%E4%B8%80%E4%BA%9B%E5%BE%AE%E9%9C%87%E7%9B%AE%E5%BD%95%E6%9E%84%E5%BB%BA%E7%9A%84%E5%AE%9E%E4%BE%8B/">基于深度学习的山东平原Ms5.5地震余震检测及发震构造研究</a>
+                <a class="prev" rel="prev" href="/2025/10/23/S-P_Amplitude_Ratios_With_Distributed_Acoustic_Sensing_and_Applicatio_to_eq_focal_mechanism/">S/P Amplitude Ratios with DAS and Application to EQ Focal Mechanism</a>
             
             
-            <a class="next" rel="next" href="/2025/10/15/Unsupervised%20Clustering%20of%20Seismic%20Signals%20Using%20Deep%20Convolutional%20Autoencoders/">Unsupervised Clustering of Seismic Signals Using Deep Convolutional Autoencoders</a>
+            <a class="next" rel="next" href="/2025/10/17/%E5%B0%8F%E5%B7%A7%E6%80%9D/">小巧思-科研版</a>
             
         </section>
 
