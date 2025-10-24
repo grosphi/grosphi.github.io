@@ -237,9 +237,7 @@
 <li><p>Identify source location and origin time from stacking functions</p>
 </li>
 </ol>
-<p>best origin time:<br>$$</p>
-<p>$$</p>
-<p>$$<br>\tau_0&#x3D;argmax_{\tau}\sum_{i &#x3D; 1}^{N}(\hat{u}_i^P(t_i^P+\tau)+\hat{u}_i^S(t_i^S+\tau))<br>$$</p>
+<p>best origin time:<br>$$<br>\tau_0&#x3D;argmax_{\tau}\sum_{i &#x3D; 1}^{N}(\hat{u}_i^P(t_i^P+\tau)+\hat{u}_i^S(t_i^S+\tau))<br>$$</p>
 <p>best location:<br>$$<br>(x_0, y_0, z_0) &#x3D; \text{argmax}<em>{x,y,x} \sum\limits</em>{i&#x3D;1}^{N} \left( \hat{u}_i^P (T_i^P(x,y,z) + \tau_0) + \hat{u}_i^S (T_i^S(x,y,z) + \tau_0) \right)<br>$$<br><code>加速方法：double-grid searching strategy（5倍）,GPU并行（快一到二个量级）</code></p>
 <h3 id="workflow"><a href="#workflow" class="headerlink" title="workflow"></a>workflow</h3><p><img src="/../image/PS%E6%B3%A2%E6%95%A3%E5%B0%84%E5%8F%A0%E5%8A%A0%E5%AE%9A%E4%BD%8D%E5%92%8C%E6%9C%BA%E5%88%B6%E8%A7%A3%E5%8F%8D%E6%BC%94/image-20251024154250385.png" alt="image-20251024154250385"></p>
 <h3 id="测试和应用"><a href="#测试和应用" class="headerlink" title="测试和应用"></a>测试和应用</h3><p><strong>测试1：层状模型</strong></p>
